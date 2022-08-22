@@ -1,37 +1,175 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
 </head>
+
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="mais opções">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Volait", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="mais opções">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Volait", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Página Inicial", "Index", "Home")</li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Página Inicial", "Index", "Home")</li>
+        </div>*@
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #F85F00">
+        <a class="navbar-brand" href="@Url.Content("~/Home/Index")">Volait</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            @if (Request.IsAuthenticated)
+            {
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item active">
+                        <a class="nav-link active" aria-current="page" href="@Url.Content("~/Home/Index")">Home &nbsp&nbsp</a>
+                    </li>
+                   
+                    @*<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="@Url.Content("~/Atendimento/Atendimento")">Atendimento</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Cliente/Cliente")">Cliente</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Funcionario/Funcionario")">Funcionario</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Hospedagem/Hospedagem")">Hospedagem</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Pacote/Pacote")">Pacote</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Passeio/Passeio")">Passeio</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Transporte/Transporte")">Transporte</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Venda/Venda")">Venda</a></li>
+                        </ul>
+                    </li>*@
+
+                    @*<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Listagem
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="@Url.Content("~/Atendimento/ListarAtendimento")">Atendimento</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Cliente/ListarCliente")">Cliente</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Funcionario/ListarFuncionario")">Listar Funcionario</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Hospedagem/ListarHospedagem")">Hospedagem</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Pacote/ListarPacote")">Pacote</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Passeio/ListarPasseio")">Passeio</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Transporte/ListarTransporte")">Transporte</a></li>
+                            <li><a class="dropdown-item" href="@Url.Content("~/Venda/ListarVenda")">Venda</a></li>
+                        </ul>
+
+                    </li>*@
+
                 </ul>
-            </div>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a class="nav-link active" aria-current="page" href="#">Olá @User.Identity.Name</a></li>
+                    @using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
+                    {
+                        <li><a class="nav-link active" aria-current="page" href="javascript:document.getElementById('logoffForm').submit()">X</a></li>
+                    }
+                </ul>
+
+            }
+            else
+            {
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="nav-link active" aria-current="page" href=@Url.Content("~/Conta/Login")>Login</a></li>
+                </ul>
+            }
+
         </div>
-    </div>
+
+    </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Volait & Travels</p>
-        </footer>
+
+        <div class="container">
+            <footer class="row row-cols-5 py-5 my-5 border-top">
+                <div class="col">
+
+
+                    <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+
+                        <img src="~/images/VolaitSlogan.png" width="350" height="200" />
+                    </a>
+                    <p class="text-muted">
+                        A sua agência de viagens Volait tem a preocupação de estar sempre mais perto de si,
+                        para maior comodidade e total facilidade na marcação das suas viagens.
+                    </p>
+                </div>
+
+                <div class="col">
+
+                </div>
+
+                <div class="col">
+                    <h5 style="color: #F85F00"><b>A VOLAIT</b></h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h5 style="color: #F85F00"><b>SERVIÇOS</b></h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h5 style="color: #F85F00"><b>FALE CONOSCO</b></h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+
+        @*<footer>
+                <p>&copy; @DateTime.Now.Year - Volait & Travels</p>
+            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")

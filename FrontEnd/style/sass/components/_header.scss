@@ -24,37 +24,39 @@
         & img {
             height: 100%;
             width: auto;
-            image-rendering: optimizeQuality;
+            image-rendering: pixelated;
         }
     }
 
     &__navbar {
+        width: 70%;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        align-items: flex-end;
+        justify-content: flex-end;
 
         &__navigation-menu {
+            width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
-
+            justify-content: flex-end;
             &__list {
+                width: 100%;
                 display: flex;
                 flex-direction: row;
-                justify-content: flex-end;
+                justify-content: space-between;
                 align-items: center;
                 padding: 0px;
-                gap: 56px;
+                gap: auto;
 
                 list-style-type: none;
                 &__item {
-                   
+                   width: fit-content;
                     a {
                         position: relative;
                         display: block;
 
                         font-family: 'Inter', sans-serif;
-                        font-size: 14px;
+                        font-size: $body-text;
                         color: $black_color;
                         font-weight: 500;
                         text-align: center;
@@ -90,9 +92,7 @@
                         }
                     }               
                 }
-                .btn{
-                    width: 100%;
-                }
+
                 
                 .btn > a {
                     background-color: $black_color;
@@ -140,10 +140,28 @@
     }
 }
 
+@media (max-width: 857px) {
+    .header{
+        margin: 0 26px;
+    }
+}
+
+@media (max-width: 797px) {
+    .header{
+        margin: 0 13px;
+    }
+}
+
+@media (max-width: 771px) {
+    .header{
+        margin: 0 7px;
+    }
+}
+
 @media (max-width: 768px) {
     .header {
         height: 8vh;
-        margin: 0;
+        
         &__navbar {
             &__navigation-menu {
                 position: absolute;
@@ -164,11 +182,15 @@
                         margin-right: 0;
                         width: 100%;
                         opacity: 0;
-
+                        padding: 25px 30px;
                         a {
                             color: $primary_color;
-                            padding: 25px 30px;
+                            
                         }
+                    }
+
+                    .btn{
+                        width: 90%;
                     }
                 }
             }
